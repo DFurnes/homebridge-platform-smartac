@@ -210,9 +210,10 @@ class Thermostat {
         return callback(new Error('Modlet broken.'));
       }
 
-      this.api.log(this.name, 'set heating / cooling active: ' + !this.powerOn);
+      var coolIt = (value === Characteristic.Active.ACTIVE);
+      this.api.log(this.name, 'set cooling active: ' + coolIt);
 
-      this.powerOn = !this.powerOn;
+      this.powerOn = coolIt;
       this.update().then(() => callback());
     })();
   }
